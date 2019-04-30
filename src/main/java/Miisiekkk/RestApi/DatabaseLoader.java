@@ -17,6 +17,10 @@ public class DatabaseLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        this.repository.save(new Employee("Frodo", "Baggins", "ring bearer"));
+
+        this.repository.save(new Employee("Frodo", "Wagins", "tuman"));
+        this.repository.save(new Employee("DilDo", "Swaggins", "cham"));
+        this.repository.save(new Employee("Grzegorz", "Duszyk", "cymbał"));
+
     }
 }
