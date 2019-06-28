@@ -1,12 +1,13 @@
-// tag::vars[]
+'use strict';
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const client = require('./client');
-// end::vars[]
-const root = '/api';
+
 const follow = require('./follow'); // function to hop multiple links by "rel"
 
-// tag::app[]
+const root = '/api';
+
 class App extends React.Component {
 
     constructor(props) {
@@ -18,6 +19,7 @@ class App extends React.Component {
         this.onNavigate = this.onNavigate.bind(this);
     }
 
+    // tag::follow-2[]
     loadFromServer(pageSize) {
         follow(client, root, [
             {rel: 'employees', params: {size: pageSize}}]
