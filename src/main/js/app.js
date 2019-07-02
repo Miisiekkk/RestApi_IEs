@@ -4,7 +4,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const client = require('./client');
 
-const follow = require('./follow'); // function to hop multiple links by "rel"
+const follow = require('./follow');
 
 const root = '/api';
 
@@ -244,6 +244,7 @@ class EmployeeList extends React.Component {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Description</th>
+                        <th>Manager</th>
                         <th></th>
                     </tr>
                     {employees}
@@ -276,7 +277,13 @@ class Employee extends React.Component {
                 <td>{this.props.employee.firstName}</td>
                 <td>{this.props.employee.lastName}</td>
                 <td>{this.props.employee.description}</td>
+                <td>{this.props.employee.entity.manager.name}</td>
                 <td>
+                    <UpdateDialog employee={this.props.employee}
+                                  attributes={this.props.attributes}
+                                  onUpdate={this.props.onUpdate}
+                                  loggedInManager={this.props.loggedInManager}/>
+
                     <button onClick={this.handleDelete}>Delete</button>
                 </td>
             </tr>
