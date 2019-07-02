@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 
-// tag::code[]
+
 @Component
 public class SpringDataJpaUserDetailsService implements UserDetailsService {
 
@@ -29,4 +29,3 @@ public class SpringDataJpaUserDetailsService implements UserDetailsService {
 	}
 
 }
-// end::code[]

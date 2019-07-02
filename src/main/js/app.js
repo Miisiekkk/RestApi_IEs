@@ -19,7 +19,7 @@ class App extends React.Component {
         this.onNavigate = this.onNavigate.bind(this);
     }
 
-    // tag::follow-2[]
+    // follow-2[]
     loadFromServer(pageSize) {
         follow(client, root, [
             {rel: 'employees', params: {size: pageSize}}]
@@ -40,9 +40,9 @@ class App extends React.Component {
                 links: employeeCollection.entity._links});
         });
     }
-    // end::follow-2[]
 
-    // tag::create[]
+
+    // create[]
     onCreate(newEmployee) {
         follow(client, root, ['employees']).then(employeeCollection => {
             return client({
@@ -62,17 +62,16 @@ class App extends React.Component {
             }
         });
     }
-    // end::create[]
 
-    // tag::delete[]
+
+    // delete[]
     onDelete(employee) {
         client({method: 'DELETE', path: employee._links.self.href}).done(response => {
             this.loadFromServer(this.state.pageSize);
         });
     }
-    // end::delete[]
 
-    // tag::navigate[]
+    // navigate[]
     onNavigate(navUri) {
         client({method: 'GET', path: navUri}).done(employeeCollection => {
             this.setState({
@@ -83,21 +82,21 @@ class App extends React.Component {
             });
         });
     }
-    // end::navigate[]
 
-    // tag::update-page-size[]
+
+    // update-page-size[]
     updatePageSize(pageSize) {
         if (pageSize !== this.state.pageSize) {
             this.loadFromServer(pageSize);
         }
     }
-    // end::update-page-size[]
 
-    // tag::follow-1[]
+
+    // follow-1[]
     componentDidMount() {
         this.loadFromServer(this.state.pageSize);
     }
-    // end::follow-1[]
+
 
     render() {
         return (
@@ -114,7 +113,7 @@ class App extends React.Component {
     }
 }
 
-// tag::create-dialog[]
+// create-dialog[]
 class CreateDialog extends React.Component {
 
     constructor(props) {
@@ -167,7 +166,7 @@ class CreateDialog extends React.Component {
     }
 
 }
-// end::create-dialog[]
+
 
 class EmployeeList extends React.Component {
 
@@ -180,7 +179,7 @@ class EmployeeList extends React.Component {
         this.handleInput = this.handleInput.bind(this);
     }
 
-    // tag::handle-page-size-updates[]
+    // handle-page-size-updates[]
     handleInput(e) {
         e.preventDefault();
         const pageSize = ReactDOM.findDOMNode(this.refs.pageSize).value;
@@ -191,9 +190,9 @@ class EmployeeList extends React.Component {
                 pageSize.substring(0, pageSize.length - 1);
         }
     }
-    // end::handle-page-size-updates[]
 
-    // tag::handle-nav[]
+
+    // handle-nav[]
     handleNavFirst(e){
         e.preventDefault();
         this.props.onNavigate(this.props.links.first.href);
@@ -213,9 +212,8 @@ class EmployeeList extends React.Component {
         e.preventDefault();
         this.props.onNavigate(this.props.links.last.href);
     }
-    // end::handle-nav[]
 
-    // tag::employee-list-render[]
+    // employee-list-render[]
     render() {
         const employees = this.props.employees.map(employee =>
             <Employee key={employee._links.self.href} employee={employee} onDelete={this.props.onDelete}/>
@@ -244,7 +242,6 @@ class EmployeeList extends React.Component {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Description</th>
-                        <th>Manager</th>
                         <th></th>
                     </tr>
                     {employees}
@@ -256,10 +253,9 @@ class EmployeeList extends React.Component {
             </div>
         )
     }
-    // end::employee-list-render[]
 }
 
-// tag::employee[]
+// employee[]
 class Employee extends React.Component {
 
     constructor(props) {
@@ -277,12 +273,10 @@ class Employee extends React.Component {
                 <td>{this.props.employee.firstName}</td>
                 <td>{this.props.employee.lastName}</td>
                 <td>{this.props.employee.description}</td>
-                <td>{this.props.employee.entity.manager.name}</td>
                 <td>
                     <UpdateDialog employee={this.props.employee}
                                   attributes={this.props.attributes}
-                                  onUpdate={this.props.onUpdate}
-                                  loggedInManager={this.props.loggedInManager}/>
+                                  onUpdate={this.props.onUpdate}/>
 
                     <button onClick={this.handleDelete}>Delete</button>
                 </td>
@@ -290,7 +284,6 @@ class Employee extends React.Component {
         )
     }
 }
-// end::employee[]
 
 ReactDOM.render(
     <App />,

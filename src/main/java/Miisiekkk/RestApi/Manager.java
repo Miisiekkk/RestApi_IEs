@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
-// tag::code[]
+
 @Data
 @ToString(exclude = "password")
 @Entity
@@ -69,4 +69,4 @@ public class Manager {
 		this.roles = roles;
 	}
 }
-// end::code[]
+
